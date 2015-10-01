@@ -23,7 +23,7 @@ class Population:
         genome = ""
         bins = [0, 1]
         i = 0
-        while i < 7:
+        while i < 8:
             genome += str(random.choice(bins))
             i += 1
         self.popSize += 1
@@ -176,7 +176,7 @@ def vary(breeders):
         xover = random.randint(0, len(parent1) - 1)
         for i in range(xover):
             child.append(parent1[i])
-        for i in range(xover, len(parent1) - 1):
+        for i in range(xover, len(parent1)):
             child.append(parent2[i])
         children.append(mutate(child))
     return children
@@ -210,14 +210,16 @@ def rouletteSelect(members):
     return members[len(members) - 1]
     
 CB = Population()
-CB.genRanPop(12) # Generate a random population of individuals and evaluate their fitnesses, they are ranked auto
+CB.genRanPop(100) # Generate a random population of individuals and evaluate their fitnesses, they are ranked auto
 CB.printPop()
 
 i = 0
 while i < 100:
     new = breed(CB)
     new.updatePop()
-    new.printPop()
+    if i % 10 == 0:
+        new.printPop()
     i += 1
+new.printPop()
 
         
